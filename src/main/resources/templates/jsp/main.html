@@ -1,0 +1,128 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <title>STU GALLERY</title>
+
+    <style>
+        /*文本太长就取前面1段*/
+        .litt {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
+    </style>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../static/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../../static/css/album.css" rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+    <div class="navbar navbar-dark bg-dark box-shadow">
+        <div class="container d-flex justify-content-between">
+            <a href="#" class="navbar-brand d-flex align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                    <circle cx="12" cy="13" r="4"></circle>
+                </svg>
+                <strong>GALLERY</strong>
+            </a>
+            <div class="btn-group pull-right " role="group" aria-label="Button group with nested dropdown">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn badge-dark">LAST</button>&nbsp;
+                    <button type="button" class="btn badge-dark">NEXT</button>&nbsp;
+                    <button id="btnGroupDrop1" type="button" class="btn badge-dark dropdown-toggle"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <a class="dropdown-item" href="#">&nbsp;Dropdown link</a>
+                        <a class="dropdown-item" href="#">&nbsp;Dropdown link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main role="main">
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+
+            <div class="row">
+            <!--<c:forEach var="i" begin="1" end="1">-->
+
+
+                <div class="col-md-4" th:each="item : ${list}">
+                        <div class="card mb-4 box-shadow">
+                            <!--<a th:href="@{/detail.html?id=${aid[i].aid}}">-->
+                            <a href="/detail.html?id=10086">
+
+                            <img class="card-img-top"  src="../../static/img/index1.jpg" alt="Card image cap"></a>
+
+                            <div class="card-body">
+
+
+                                <p class="card-text litt" size="" th:text="${item.title}">标题</p>
+                                <!--<p class="card-text">${pic[i].pic}</p>-->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                    </div>
+                                    <small class="text-muted" th:text="${item.author}">作者</small>
+                                    <small class="text-muted" th:text="${item.play}">播放量</small>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <br>
+        </div>
+    </div>
+
+</main>
+
+<footer class="text-muted">
+    <div class="container">
+        <footer class="probootstrap-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>Copyright &copy; 2018.汕头大学移动编程 All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../../static/js/jquery-3.3.1.slim.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../static/js/jquery-slim.min.js"><\/script>')</script>
+<script src="../../static/js/popper.min.js"></script>
+<script src="../../static/js/bootstrap.js"></script>
+<script src="../../static/js/holder.min.js"></script>
+</body>
+</html>

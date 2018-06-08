@@ -1,0 +1,89 @@
+﻿<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:c="http://java.sun.com/xml/ns/javaee">
+<head>
+    <title>录入信息</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+
+    <link href="../../static/inmsg/css/base.css" type="text/css" rel="stylesheet"/>
+    <link href="../../static/inmsg/css/editTable.css" type="text/css" rel="stylesheet"/>
+    <link href="../../static/css/bootstrap.css" rel="stylesheet">
+
+    <script language="javascript" type="text/javascript" src="../../static/inmsg/js/jquery-1.7.2.min.js"></script>
+    <script language="javascript" type="text/javascript" src="../../static/inmsg/js/editTable.js"></script>
+    <script src="../../static/js/tablesdeal.js"></script>
+
+</head>
+<body>
+<div class="container">
+
+    <table class="edtitable" id="table-batabase">
+        <thead>
+        <tr>
+            <th colspan="4">录入表格</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th>学号</th>
+            <th>姓名</th>
+            <th>奖项</th>
+
+            <th class="del-col">操作</th>
+        </tr>
+        <tr>
+            <td>RSD12345678</td>
+            <td>盛世花城</td>
+            <td>SSR</td>
+            <td class="del-col">
+                <a href="javascript:void(0);" class="delBtn">删除</a>
+            </td>
+        </tr>
+
+        <tr class="append-row">
+            <td colspan="4" align="right">
+                <input type="button" id="addBtn" value="添 加"/>
+
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+    <h1 onclick="this.innerHTML='谢谢!'">请点击该文本</h1>
+    <button class="btn-primary btn del-col float-right" type="submit" id="save">提 交</button>
+</div>
+<script>
+
+    var table = document.getElementById('table-batabase');
+    save.onclick = function () {
+        alert(table.rows.length-3);
+        var tr;
+        var dataArray = new Array();
+        for (var i = 3; i < table.rows.length; i++) {
+
+            date = new Object();
+            tr = table.rows[i];
+            date.Code = tr.childNodes[0].innerHTML;
+            date.Name = tr.childNodes[1].innerHTML;
+            date.Age = tr.childNodes[2].innerHTML;
+            //将table表对象转换成数组装成json放在数组里
+            dataArray.push(JSON.stringify(date));
+            alert(tr.childNodes[0].innerHTML);
+        }
+
+        //将数组装成json放在数组里
+        document.getElementById('JSONText').value = dataArray.toString();
+        alert(dataArray.toString());
+        myform.submit();
+    }
+</script>
+
+<script src="../../static/js/jquery-3.3.1.slim.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../static/js/jquery-slim.min.js"><\/script>')</script>
+<script src="../../static/js/popper.min.js"></script>
+<script src="../../static/js/bootstrap.js"></script>
+<script src="../../static/js/holder.min.js"></script>
+</body>
+</html>
