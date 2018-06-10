@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-        <title>Spring Boot File Upload / Download Rest API Example</title>
+        <title>上传文件/下载接口</title>
         <link rel="stylesheet" href="../../static/css/main.css" />
     </head>
     <body>
-        <noscript>
+    <noscript>
             <h2>Sorry! Your browser doesn't support Javascript</h2>
         </noscript>
-        <div class="upload-container">
+    <div class="upload-container" th:fragment="updata">
             <div class="upload-header">
                 <h2>Spring Boot File Upload / Download Rest API Example</h2>
             </div>

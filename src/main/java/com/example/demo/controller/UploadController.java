@@ -24,55 +24,47 @@ public class UploadController {
     private HttpServletRequest request;
 
     @RequestMapping("/up")
-    public ModelAndView upfile(){
+    public ModelAndView upfile() {
         ModelAndView mav = new ModelAndView("jsp/fileupload.html");
 
         return mav;
     }
 
 
-    @RequestMapping("/upload11")
-    public String hello(){
-        System.out.println("hello");
-        return "0";
-    }
+    @RequestMapping(value = {"/upload"}, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String upload(@RequestParam("uploadFile") MultipartFile[] uploadFile) {
+        JSONObject bb = new JSONObject();
+        System.out.println("进入");
+        bb.put("Status", "Success");
+        System.out.println(uploadFile.length);
+        if (uploadFile.length > 0 && uploadFile != null) {
+            try {
+                String leftPath = this.request.getSession().getServletContext().getRealPath("save/");
+                MultipartFile[] var4 = uploadFile;
+                int var5 = uploadFile.length;
 
+                for (int var6 = 0; var6 < var5; ++var6) {
+                    MultipartFile file = var4[var6];
+                    file.transferTo(new File(leftPath + file.getOriginalFilename()));
 
-@RequestMapping(value = {"/upload"}, produces = {"application/json;charset=UTF-8"})
-//@RequestMapping("/upload")
-@ResponseBody
-public String upload(@RequestParam("uploadFile") MultipartFile[] uploadFile) {
-    JSONObject bb = new JSONObject();
-    System.out.println("进入");
-    bb.put("Status", "Success");
-    System.out.println(uploadFile.length);
-    if (uploadFile.length > 0 && uploadFile != null) {
-        try {
-            String leftPath = this.request.getSession().getServletContext().getRealPath("save/");
-            MultipartFile[] var4 = uploadFile;
-            int var5 = uploadFile.length;
-
-            for(int var6 = 0; var6 < var5; ++var6) {
-                MultipartFile file = var4[var6];
-                file.transferTo(new File(leftPath + file.getOriginalFilename()));
-
-                try {
-                    unZipFiles.unZipFiles(new File(leftPath + file.getOriginalFilename()), "D:/data/");
-                    System.out.println("上传并且解压成功");
-                } catch (IOException var9) {
-                    var9.printStackTrace();
+                    try {
+                        unZipFiles.unZipFiles(new File(leftPath + file.getOriginalFilename()), "D:/data/");
+                        System.out.println("上传并且解压成功");
+                    } catch (IOException var9) {
+                        var9.printStackTrace();
+                    }
                 }
+            } catch (Exception var10) {
+                var10.printStackTrace();
             }
-        } catch (Exception var10) {
-            var10.printStackTrace();
         }
-    }
 
-    return bb.toString();
-}
+        return bb.toString();
+    }
 
     @RequestMapping("list")
-    public ModelAndView list(){
+    public ModelAndView list() {
         String filePath = request.getSession().getServletContext().getRealPath("/");
         ModelAndView mav = new ModelAndView("list");
 
@@ -82,8 +74,8 @@ public String upload(@RequestParam("uploadFile") MultipartFile[] uploadFile) {
         int len = fileNames.length;
 
 
-        mav.getModel().put("fileNames",fileNames);
-        mav.getModel().put("len",len);
+        mav.getModel().put("fileNames", fileNames);
+        mav.getModel().put("len", len);
         return mav;
     }
 }

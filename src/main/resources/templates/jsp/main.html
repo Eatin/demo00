@@ -8,7 +8,7 @@
     <meta name="author" content="">
 
 
-    <title>STU GALLERY</title>
+    <title>首页</title>
 
     <style>
         /*文本太长就取前面1段*/
@@ -68,33 +68,33 @@
             <!--<c:forEach var="i" begin="1" end="1">-->
 
 
-                <div class="col-md-4" th:each="item : ${list}">
+                <div class="col-md-4" th:each="app,key:${map}">
                         <div class="card mb-4 box-shadow">
                             <!--<a th:href="@{/detail.html?id=${aid[i].aid}}">-->
-                            <a href="/detail.html?id=10086">
+                            <a th:href="'/detail/'+${app.value.getStuNum()}">
 
-                            <img class="card-img-top"  src="../../static/img/index1.jpg" alt="Card image cap"></a>
+                                <img class="card-img-top"
+                                     th:src="@{'/uploads/cover/{stuNum}.PNG'(stuNum=${app.value.getStuNum()})}"
+                                     alt="Card image cap">
+                            </a>
+
 
                             <div class="card-body">
 
 
-                                <p class="card-text litt" size="" th:text="${item.title}">标题</p>
+                                <p class="card-text litt" size="" th:text="${app.value.getAppName()}">标题</p>
                                 <!--<p class="card-text">${pic[i].pic}</p>-->
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                                     </div>
-                                    <small class="text-muted" th:text="${item.author}">作者</small>
-                                    <small class="text-muted" th:text="${item.play}">播放量</small>
+                                    <small class="text-muted" th:text="${app.value.getUserName()}">作者</small>
+                                    <small class="text-muted" th:text="${app.value.getSugSys()}">推荐系统</small>
 
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-
-
             </div>
             <br>
         </div>
